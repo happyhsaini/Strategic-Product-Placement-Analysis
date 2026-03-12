@@ -1,0 +1,579 @@
+/* ==================== GLOBAL STYLES ==================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: #f8f9fa;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ==================== NAVBAR ==================== */
+
+.navbar {
+  background: linear-gradient(135deg, #1f4037 0%, #0d7377 100%);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-brand {
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, #99f2c8, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+}
+
+.navbar-nav .nav-link {
+  margin: 0 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 0.95rem;
+}
+
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background: #99f2c8;
+  transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #99f2c8 !important;
+}
+
+.navbar-nav .nav-link:hover::after {
+  width: 100%;
+}
+
+/* ==================== HERO SECTION ==================== */
+
+.hero {
+  background: linear-gradient(135deg, #1f4037 0%, #0d7377 50%, #14919b 100%);
+  color: white;
+  padding: 140px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,128C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+  background-size: cover;
+  opacity: 0.5;
+  animation: wave 15s linear infinite;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin-bottom: 20px;
+  animation: slideDown 1s ease-out;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  letter-spacing: -1px;
+}
+
+.hero p {
+  font-size: 1.4rem;
+  margin-top: 15px;
+  margin-bottom: 30px;
+  font-weight: 300;
+  animation: slideUp 1s ease-out 0.2s backwards;
+  letter-spacing: 0.5px;
+  line-height: 1.8;
+}
+
+.hero .btn {
+  animation: slideUp 1s ease-out 0.4s backwards;
+  font-weight: 700;
+  padding: 12px 35px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  display: inline-block;
+  margin: 5px;
+}
+
+.hero .btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+/* ==================== ANIMATIONS ==================== */
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes wave {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==================== SECTION TITLES ==================== */
+
+.section-title {
+  font-weight: 800;
+  margin-bottom: 50px;
+  color: #1f4037;
+  font-size: 2.5rem;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  letter-spacing: -0.5px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #0d7377, #99f2c8);
+  border-radius: 2px;
+  animation: slideDown 0.8s ease-out 0.3s backwards;
+}
+
+/* ==================== FEATURE CARDS ==================== */
+
+.feature-card {
+  border: none;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 30px;
+  text-align: center;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 25px rgba(13, 115, 119, 0.2);
+}
+
+.feature-card i {
+  font-size: 3rem;
+  color: #0d7377;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover i {
+  transform: scale(1.1) rotateY(10deg);
+  color: #14919b;
+}
+
+.feature-card h5 {
+  color: #1f4037;
+  font-weight: 800;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.feature-card p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* ==================== ABOUT SECTION ==================== */
+
+#about {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  padding: 60px 20px;
+}
+
+.about-content {
+  padding: 20px;
+}
+
+.about-content h3 {
+  color: #0d7377;
+  font-weight: 800;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.about-content p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.about-content ul li {
+  margin-bottom: 12px;
+  font-size: 1.05rem;
+}
+
+.about-content ul i {
+  color: #0d7377;
+  margin-right: 10px;
+}
+
+.about-image {
+  background: linear-gradient(135deg, #0d7377 0%, #14919b 100%);
+  border-radius: 15px;
+  padding: 40px;
+  color: white;
+  text-align: center;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 8px 30px rgba(13, 115, 119, 0.2);
+  animation: slideUp 1s ease-out 0.3s backwards;
+}
+
+.about-image i {
+  font-size: 5rem;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.about-image h4 {
+  font-weight: 800;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.about-image p {
+  opacity: 0.9;
+  font-size: 1rem;
+}
+
+/* ==================== INSIGHTS SECTION ==================== */
+
+#insights {
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+  padding: 60px 20px;
+}
+
+.insight-card {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  border-top: 4px solid #0d7377;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.insight-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.insight-card:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.insight-card:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.insight-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(13, 115, 119, 0.15);
+}
+
+.insight-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.insight-card h5 {
+  color: #0d7377;
+  font-weight: 800;
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+}
+
+.insight-card p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ==================== DASHBOARD SECTION ==================== */
+
+#dashboard {
+  padding: 60px 20px;
+}
+
+.dashboard-box {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border: 1px solid #f0f0f0;
+  transition: all 0.3s ease;
+  animation: slideUp 1s ease-out 0.2s backwards;
+}
+
+.dashboard-box:hover {
+  box-shadow: 0 8px 30px rgba(13, 115, 119, 0.15);
+}
+
+.dashboard-box h5 {
+  color: #0d7377;
+  font-weight: 800;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+}
+
+.dashboard-box iframe {
+  width: 100%;
+  height: 700px;
+  border: none;
+  border-radius: 8px;
+}
+
+/* ==================== STORY SECTION ==================== */
+
+#story {
+  padding: 60px 20px;
+  background: white;
+}
+
+/* ==================== FOOTER ==================== */
+
+footer {
+  background: linear-gradient(135deg, #1f4037 0%, #0d7377 100%);
+  color: white;
+  padding: 50px 20px 20px;
+  margin-top: 80px;
+}
+
+footer h5 {
+  font-weight: 800;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+footer p {
+  opacity: 0.85;
+  line-height: 1.7;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer ul li {
+  margin-bottom: 8px;
+}
+
+footer a {
+  color: #99f2c8;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+footer a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+footer hr {
+  opacity: 0.2;
+  margin: 30px 0;
+  border-color: white;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .insight-card {
+    padding: 20px;
+  }
+
+  .about-image {
+    margin-top: 30px;
+  }
+
+  .feature-card {
+    padding: 20px;
+  }
+
+  .dashboard-box {
+    padding: 20px;
+  }
+
+  .dashboard-box iframe {
+    height: 500px;
+  }
+
+  .navbar-nav .nav-link {
+    margin: 5px 0;
+  }
+
+  .hero .btn {
+    padding: 10px 25px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+  }
+
+  .dashboard-box iframe {
+    height: 400px;
+  }
+
+  .navbar {
+    padding: 0.8rem 0;
+  }
+
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+}
+
+/* ==================== SCROLLBAR STYLING ==================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #0d7377, #14919b);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #1f4037, #0d7377);
+}
+
+footer p {
+    margin: 0;
+}
+
+
+/* Buttons */
+
+.btn-light {
+    font-weight: 600;
+    padding: 10px 20px;
+}
+
+
+/* Mobile responsiveness */
+
+@media (max-width: 768px) {
+
+.hero h1 {
+    font-size: 32px;
+}
+
+.hero p {
+    font-size: 16px;
+}
+
+.dashboard-box iframe {
+    height: 500px;
+}
+
+}

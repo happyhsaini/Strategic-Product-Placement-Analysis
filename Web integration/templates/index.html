@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Strategic Product Placement Analysis</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+<style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  scroll-behavior: smooth;
+  font-family: 'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', sans-serif;
+  color: #1e293b;
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+/* Modern Navbar */
+.navbar {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+  box-shadow: 0 4px 30px rgba(15, 23, 42, 0.25);
+  padding: 1.3rem 0;
+  border-bottom: 3px solid #3b82f6;
+}
+
+.navbar-brand {
+  font-weight: 900;
+  font-size: 1.4rem;
+  letter-spacing: -0.5px;
+  color: white !important;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.02);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.navbar-nav .nav-link {
+  margin: 0 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+}
+
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.navbar-nav .nav-link:hover {
+  color: white !important;
+}
+
+.navbar-nav .nav-link:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #3b82f6 100%);
+  color: white;
+  padding: 160px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,128C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+  background-size: cover;
+  opacity: 0.5;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 {
+  font-size: 3.8rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  animation: slideDown 1s ease-out;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  letter-spacing: -1px;
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  margin-top: 15px;
+  margin-bottom: 30px;
+  font-weight: 400;
+  animation: slideUp 1s ease-out 0.2s backwards;
+  letter-spacing: 0.3px;
+  line-height: 1.6;
+}
+
+.hero .btn {
+  animation: slideUp 1s ease-out 0.4s backwards;
+  font-weight: 700;
+  padding: 12px 35px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.hero .btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Section Titles */
+.section-title {
+  font-weight: 700;
+  margin-bottom: 50px;
+  color: #0f172a;
+  font-size: 2.5rem;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  letter-spacing: -0.5px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6, #1e40af);
+  border-radius: 3px;
+}
+
+/* Dashboard & Content Boxes */
+.dashboard-box {
+  background: white;
+  padding: 35px;
+  border-radius: 16px;
+  box-shadow: 0 4px 25px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.dashboard-box:hover {
+  box-shadow: 0 12px 45px rgba(59, 130, 246, 0.15);
+  transform: translateY(-3px);
+  border-color: #3b82f6;
+}
+
+/* Section Spacing */
+section {
+  padding: 70px 20px;
+}
+
+section h2 {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+section p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #475569;
+  font-weight: 400;
+}
+
+/* Icon enhancements */
+.bi {
+  transition: all 0.3s ease;
+}
+
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+/* Card hover animations */
+.stat-card:hover .bi {
+  transform: scale(1.15) rotate(5deg);
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Links */
+a {
+  transition: all 0.3s ease;
+}
+
+footer a:hover {
+  color: white !important;
+  text-decoration: underline;
+}
+
+/* Buttons */
+.btn-light {
+  background-color: white;
+  color: #1e40af;
+  font-weight: 600;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-light:hover {
+  background-color: #3b82f6;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#home">
+      <i class="bi bi-graph-up-arrow" style="margin-right: 5px;"></i> Product Placement
+      <span style="background: #3b82f6; padding: 2px 8px; border-radius: 12px; font-size: 0.65rem; margin-left: 8px; font-weight: 700; letter-spacing: 0.5px;">PRO</span>
+    </a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#home"><i class="bi bi-house-door me-1"></i>Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#about"><i class="bi bi-info-circle me-1"></i>About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#dashboard"><i class="bi bi-bar-chart-line me-1"></i>Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#story"><i class="bi bi-book me-1"></i>Story</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero" id="home">
+  <div class="container">
+    <h1 class="fw-bold">
+      <span style="font-weight: 900;">Strategic</span> Product Placement <span style="font-weight: 900;">Analysis</span>
+    </h1>
+    <p class="lead" style="font-weight: 600;">
+      Unlock <strong style="font-weight: 800; text-shadow: 0 2px 8px rgba(0,0,0,0.15);">data-driven insights</strong> to maximize <strong style="font-weight: 800; text-shadow: 0 2px 8px rgba(0,0,0,0.15);">sales impact</strong> with intelligent <strong style="font-weight: 800; text-shadow: 0 2px 8px rgba(0,0,0,0.15);">product positioning strategies</strong>
+    </p>
+    <a href="#dashboard" class="btn btn-light btn-lg mt-4">
+      <i class="bi bi-play-circle"></i> Explore Dashboard
+    </a>
+    <a href="#about" class="btn btn-outline-light btn-lg mt-4 ms-3" style="font-weight: 700;">
+      Learn More
+    </a>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="container py-5" id="about">
+  <h2 class="section-title text-center"><i class="bi bi-info-circle me-2" style="color: #3b82f6;"></i>About</h2>
+  <div class="row align-items-center mt-5">
+    <div class="col-lg-12">
+      <div style="background: white; padding: 40px; border-radius: 16px; box-shadow: 0 4px 25px rgba(15, 23, 42, 0.08); border-left: 5px solid #3b82f6;">
+        <p style="font-size: 1.15rem; line-height: 1.9; color: #1e293b; margin-bottom: 25px; font-weight: 500;">
+          <i class="bi bi-graph-up-arrow" style="color: #3b82f6; margin-right: 8px; font-size: 1.2rem;"></i>
+          This project analyzes how <strong style="color: #0f172a; font-weight: 800;">strategic product placement</strong> on <span style="color: #1e40af; font-weight: 700;">retail shelves</span> influences <strong style="color: #0f172a; font-weight: 800;">sales performance</strong>. Product positioning, <span style="color: #3b82f6; font-weight: 700;">shelf location</span>, <span style="color: #3b82f6; font-weight: 700;">visibility</span>, and <span style="color: #3b82f6; font-weight: 700;">store layout</span> are critical factors that directly impact <strong style="color: #0f172a; font-weight: 800;">customer purchasing decisions</strong> and <strong style="color: #1e40af; font-weight: 800;">business revenue</strong>.
+        </p>
+        <p style="font-size: 1.15rem; line-height: 1.9; color: #1e293b; margin-bottom: 35px; font-weight: 500;">
+          <i class="bi bi-pie-chart" style="color: #3b82f6; margin-right: 8px; font-size: 1.2rem;"></i>
+          Using <strong style="color: #1e40af; font-weight: 800;">interactive Tableau dashboards</strong>, we examine <span style="color: #3b82f6; font-weight: 700;">real-world data</span> to identify <strong style="color: #0f172a; font-weight: 800;">patterns</strong> between product placement and <strong style="color: #0f172a; font-weight: 800;">sales outcomes</strong>. The analysis helps retailers understand which <span style="color: #1e40af; font-weight: 700;">placement strategies</span> drive the <strong style="color: #0f172a; font-weight: 800;">highest returns</strong> and <strong style="color: #0f172a; font-weight: 800;">customer satisfaction</strong>.
+        </p>
+        <h4 style="color: #0f172a; font-weight: 800; margin-top: 35px; margin-bottom: 25px; font-size: 1.4rem;">
+          <i class="bi bi-database" style="color: #3b82f6; margin-right: 10px;"></i>Dataset Overview
+        </h4>
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; height: 100%;">
+              <div style="display: flex; align-items: start; margin-bottom: 15px;">
+                <i class="bi bi-tag-fill" style="color: #3b82f6; font-size: 1.8rem; margin-right: 15px;"></i>
+                <div>
+                  <h6 style="color: #0f172a; font-weight: 800; margin-bottom: 8px; font-size: 1.05rem;">Product Categories</h6>
+                  <p style="color: #475569; margin: 0; font-size: 0.95rem; font-weight: 600;"><strong style="color: #1e40af;">Food</strong>, <strong style="color: #1e40af;">Beverages</strong>, <strong style="color: #1e40af;">Consumer Goods</strong> across multiple retail locations</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; height: 100%;">
+              <div style="display: flex; align-items: start; margin-bottom: 15px;">
+                <i class="bi bi-clipboard-data" style="color: #3b82f6; font-size: 1.8rem; margin-right: 15px;"></i>
+                <div>
+                  <h6 style="color: #0f172a; font-weight: 800; margin-bottom: 8px; font-size: 1.05rem;">Data Points</h6>
+                  <p style="color: #475569; margin: 0; font-size: 0.95rem; font-weight: 600;"><strong style="color: #3b82f6;">Shelf Position</strong>, <strong style="color: #3b82f6;">Sales Volume</strong>, <strong style="color: #3b82f6;">Price Point</strong>, <strong style="color: #3b82f6;">Inventory Levels</strong>, <strong style="color: #3b82f6;">Customer Traffic</strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; height: 100%;">
+              <div style="display: flex; align-items: start; margin-bottom: 15px;">
+                <i class="bi bi-calendar-range" style="color: #3b82f6; font-size: 1.8rem; margin-right: 15px;"></i>
+                <div>
+                  <h6 style="color: #0f172a; font-weight: 800; margin-bottom: 8px; font-size: 1.05rem;">Analysis Period</h6>
+                  <p style="color: #475569; margin: 0; font-size: 0.95rem; font-weight: 600;"><strong style="color: #1e40af;">Multiple Seasons</strong> and <strong style="color: #1e40af;">Promotional Periods</strong> to capture behavioral variations</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; height: 100%;">
+              <div style="display: flex; align-items: start; margin-bottom: 15px;">
+                <i class="bi bi-graph-up" style="color: #3b82f6; font-size: 1.8rem; margin-right: 15px;"></i>
+                <div>
+                  <h6 style="color: #0f172a; font-weight: 800; margin-bottom: 8px; font-size: 1.05rem;">Metrics Tracked</h6>
+                  <p style="color: #475569; margin: 0; font-size: 0.95rem; font-weight: 600;"><strong style="color: #3b82f6;">Sales Per Placement</strong>, <strong style="color: #3b82f6;">Customer Engagement</strong>, <strong style="color: #3b82f6;">Conversion Rates</strong> by position</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Dashboard Section -->
+
+<section class="container py-5" id="dashboard">
+
+<h2 class="section-title text-center"><i class="bi bi-bar-chart-line me-2" style="color: #3b82f6;"></i>Dashboard</h2>
+
+<p style="text-align: center; font-size: 1.15rem; color: #1e293b; margin-bottom: 40px; font-weight: 600;">
+  <i class="bi bi-lightbulb" style="color: #3b82f6; margin-right: 6px;"></i>
+  Explore the <strong style="color: #1e40af; font-weight: 800;">complete product placement analysis</strong> with <span style="color: #3b82f6; font-weight: 700;">interactive visualizations</span> and <span style="color: #3b82f6; font-weight: 700;">detailed metrics</span>.
+</p>
+
+<div class="dashboard-box">
+<div class='tableauPlaceholder' id='viz1772711103070' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ZH&#47;ZH4YRKW2R&#47;1_rss.png' style='border: none' />
+</a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+<param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;ZH4YRKW2R' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ZH&#47;ZH4YRKW2R&#47;1.png' />
+<param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' />
+</object></div>           <script type='text/javascript'>                    var divElement = document.getElementById('viz1772711103070');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.minWidth='1016px';vizElement.style.maxWidth='100%';vizElement.style.minHeight='1014px';vizElement.style.maxHeight=(divElement.offsetWidth*0.75)+'px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.minWidth='1016px';vizElement.style.maxWidth='100%';vizElement.style.minHeight='1014px';vizElement.style.maxHeight=(divElement.offsetWidth*0.75)+'px';} else { vizElement.style.minWidth='1016px';vizElement.style.maxWidth='100%';vizElement.style.minHeight='2400px';vizElement.style.maxHeight=(divElement.offsetWidth*1.77)+'px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+</div>
+
+</section>
+
+
+<!-- Story Section -->
+
+<section class="container py-5" id="story">
+
+<h2 class="section-title text-center"><i class="bi bi-book me-2" style="color: #3b82f6;"></i>Story</h2>
+
+<p style="text-align: center; font-size: 1.15rem; color: #1e293b; margin-bottom: 40px; font-weight: 600;">
+  <i class="bi bi-layout-text-sidebar-reverse" style="color: #3b82f6; margin-right: 6px;"></i>
+  <strong style="color: #0f172a; font-weight: 800;">Narrative analysis</strong> showing the relationship between <span style="color: #1e40af; font-weight: 700;">product placement</span> and <span style="color: #3b82f6; font-weight: 700;">sales performance</span>.
+</p>
+
+<div class="dashboard-box mb-4">
+
+<div class='tableauPlaceholder' id='viz1772710966732' style='position: relative'><noscript><a href='#'>
+    <img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;XR&#47;XR2CJXYGW&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'>
+        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+        <param name='embed_code_version' value='3' /> 
+        <param name='path' value='shared&#47;XR2CJXYGW' /> 
+        <param name='toolbar' value='yes' />
+        <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;XR&#47;XR2CJXYGW&#47;1.png' />
+        <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' />
+        <param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' />
+        <param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1772710966732');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1016px';vizElement.style.height='1014px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+</div>
+
+</section>
+
+
+<!-- Footer -->
+
+<footer style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; padding: 60px 20px 30px; margin-top: 80px; border-top: 3px solid #3b82f6;">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div style="margin-bottom: 20px;">
+          <h5 style="font-weight: 700; font-size: 1.1rem; margin-bottom: 15px; color: #3b82f6;">
+            <i class="bi bi-graph-up-arrow" style="margin-right: 8px;"></i>Product Analysis
+          </h5>
+          <p style="opacity: 0.8; font-size: 0.95rem; line-height: 1.6;">
+            Strategic analysis of product placement impact on retail sales performance using interactive data visualizations.
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <h5 style="font-weight: 700; font-size: 1.1rem; margin-bottom: 15px; color: #3b82f6;"><i class="bi bi-link-45deg me-2"></i>Quick Links</h5>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 10px;"><a href="#home" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s; font-size: 0.95rem;">Home</a></li>
+          <li style="margin-bottom: 10px;"><a href="#about" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s; font-size: 0.95rem;">About</a></li>
+          <li style="margin-bottom: 10px;"><a href="#dashboard" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s; font-size: 0.95rem;">Dashboard</a></li>
+          <li><a href="#story" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.3s; font-size: 0.95rem;">Story</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <h5 style="font-weight: 700; font-size: 1.1rem; margin-bottom: 15px; color: #3b82f6;"><i class="bi bi-stack me-2"></i>Technology Stack</h5>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 8px; font-size: 0.95rem; opacity: 0.85;"><i class="bi bi-diagram-3" style="margin-right: 8px; color: #3b82f6;"></i>Tableau Dashboards</li>
+          <li style="margin-bottom: 8px; font-size: 0.95rem; opacity: 0.85;"><i class="bi bi-laptop" style="margin-right: 8px; color: #3b82f6;"></i>Python Analytics</li>
+          <li style="margin-bottom: 8px; font-size: 0.95rem; opacity: 0.85;"><i class="bi bi-database" style="margin-right: 8px; color: #3b82f6;"></i>Data Processing</li>
+          <li style="font-size: 0.95rem; opacity: 0.85;"><i class="bi bi-eye" style="margin-right: 8px; color: #3b82f6;"></i>Business Intelligence</li>
+        </ul>
+      </div>
+    </div>
+    <hr style="opacity: 0.15; margin: 40px 0;">
+    <div style="text-align: center;">
+      <p style="margin: 0; font-size: 0.85rem; opacity: 0.7;">
+        Built with <span style="color: #3b82f6; font-weight: 600;">Data Analytics</span> • 
+        <span style="color: #3b82f6; font-weight: 600;">Tableau</span> • 
+        <span style="color: #3b82f6; font-weight: 600;">Python</span>
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
